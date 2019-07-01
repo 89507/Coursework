@@ -4,11 +4,11 @@ import java.sql.ResultSet;
 public class UserContoller {
 
     // This method prints out the contents of users from my SQL table
-    private static void getallUsers(){
+    public static void getallUsers(){
 
         try {
 
-            PreparedStatement ps = db.prepareStatement("SELECT * FROM Users");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT * FROM Users");
 
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -28,7 +28,7 @@ public class UserContoller {
 
         try {
 
-            PreparedStatement ps = db.prepareStatement("INSERT INTO Users (username, DOB) VALUES (?, ?)");
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (username, DOB) VALUES (?, ?)");
 
             ps.setString(1, username);
             ps.setString(2, DOB);

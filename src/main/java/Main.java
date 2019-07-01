@@ -17,7 +17,7 @@ public class Main {
 
 
         // code to get data from, write to the database etc goes here!
-        getallUsers();
+        UserContoller.getallUsers();
 
 
         closeDatabase();
