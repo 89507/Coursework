@@ -1,5 +1,12 @@
-// These are imports, they add a connection class, so the code can use the SQL library
+package Sever;// These are imports, they add a connection class, so the code can use the SQL library
 // Test for github
+import Controllers.UserContoller;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.servlet.ServletContainer;
 import org.sqlite.SQLiteConfig;
 
 import java.sql.Connection;
@@ -11,8 +18,30 @@ import java.sql.ResultSet;
 public class Main {
 
     public static Connection db = null;
-
     public static void main(String[] args) {
+
+        openDatabase("Database.db");
+
+        ResourceConfig config = new ResourceConfig();
+        config.packages("Controllers");
+        config.register(MultiPartFeature.class);
+        ServletHolder servlet = new ServletHolder(new ServletContainer(config));
+
+        Server server = new Server(8081);
+        ServletContextHandler context = new ServletContextHandler(server, "/");
+        context.addServlet(servlet, "/*");
+
+        try {
+            server.start();
+            System.out.println("Server successfully started.");
+            server.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+   /* public static void main(String[] args) {
         openDatabase("Database.db");
 
 
@@ -21,7 +50,7 @@ public class Main {
 
 
         closeDatabase();
-    }
+    }*/
 
     // Opening and setting up
     private static void openDatabase(String dbFile) {
@@ -38,6 +67,7 @@ public class Main {
         }
 
     }
+
 
     // This is to close the data base after the code has accessed it
     private static void closeDatabase() {
