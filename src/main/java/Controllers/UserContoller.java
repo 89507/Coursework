@@ -10,11 +10,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 @Path("Users/")
 public class UserContoller {
 
     // This method prints out the contents of users from my SQL table
-    @GET
+   /* @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
 
@@ -23,7 +24,7 @@ public class UserContoller {
         JSONArray list = new JSONArray();
 
         try {
-
+//      This is a Crud statement to Read
             PreparedStatement ps = Main.db.prepareStatement("SELECT * FROM Users");
 
             ResultSet results = ps.executeQuery();
@@ -47,23 +48,83 @@ public class UserContoller {
 
         }
 
+    }*/
+
+    public static void getallUsers() {
+        System.out.println("thing/list");
+
+        try {
+//      This is a Crud statement to Read
+            PreparedStatement ps = Main.db.prepareStatement("SELECT UserID, Username, DOB, Email, Gender, Password FROM Users");
+
+            ResultSet results = ps.executeQuery();
+            while (results.next()) {
+                int UserId = results.getInt(1);
+                String Username = results.getString(2);
+                String DOB = results.getString(3);
+                String Email = results.getString(4);
+                String Gender = results.getString(5);
+                String Password = results.getString(6);
+                System.out.println("ID: " + UserId + " ");
+                System.out.println("Username: " + Username + " ");
+                System.out.println("DOB: " + DOB + " ");
+                System.out.println("Email: " + Email + " ");
+                System.out.println("Gender: " + Gender + " ");
+                System.out.println("Password: " + Password + " ");
+
+            }
+
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+
+        }
+
     }
-    // this method adds a new user
-    private static void adduser(String username, String DOB){
+
+    // This is a CRUD create statement
+    public static void adduser(Integer userID, String username, String DOB, String email, String gender, String password) {
 
         try {
 
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (username, DOB) VALUES (?, ?)");
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (userId, username, DOB, email, gender, password) VALUES (?, ?, ?, ?,?,?)");
 
-            ps.setString(1, username);
-            ps.setString(2, DOB);
-
+            ps.setInt(1, userID);
+            ps.setString(2, username);
+            ps.setString(3, DOB);
+            ps.setString(4, email);
+            ps.setString(5, gender);
+            ps.setString(6, password);
             ps.executeUpdate();
 
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
         }
+    }
+// This a update crud statement
+        public static void updateuser(Integer userID, String username, String DOB, String email, String gender, String password){
 
+
+            try {
+                PreparedStatement ps = Main.db.prepareStatement("UPDATE Users SET UserID = ?,Username = ?, DOB = ?, Email = ?, Gender = ?, Password = ?,");
+
+                ps.setInt(1, userID);
+                ps.setString(2, username);
+                ps.setString(3, DOB);
+                ps.setString(4, email);
+                ps.setString(5, gender);
+                ps.setString(6, password);
+                ps.executeUpdate();
+
+
+
+        } catch (Exception exception) {
+                System.out.println("Database error: " + exception.getMessage());
+            }
+        }
 
     }
+
+
+
+
 }

@@ -18,9 +18,10 @@ import java.sql.ResultSet;
 public class Main {
 
     public static Connection db = null;
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         openDatabase("Database.db");
+        UserContoller.adduser(5,"Bob", "19/11/2011","bob@gmail.com","Male", "password");
 
         ResourceConfig config = new ResourceConfig();
         config.packages("Controllers");
@@ -38,19 +39,20 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
-   /* public static void main(String[] args) {
+    public static void main(String[] args) {
         openDatabase("Database.db");
 
 
         // code to get data from, write to the database etc goes here!
+
         UserContoller.getallUsers();
 
 
         closeDatabase();
-    }*/
+    }
 
     // Opening and setting up
     private static void openDatabase(String dbFile) {
