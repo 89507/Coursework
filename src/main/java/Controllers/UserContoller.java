@@ -122,9 +122,24 @@ public class UserContoller {
             }
         }
 
+        public static void deletleUsers(int UserID){
+
+        try{
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Users WHERE UserID = ?");
+
+            ps.setInt(1,UserID);
+
+            ps.execute();
+
+        } catch(Exception exception) {
+            System.out.println("Databse error: " + exception.getMessage());
+        }
+    }
+
+
+
     }
 
 
 
 
-}
