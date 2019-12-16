@@ -51,7 +51,7 @@ public class UserContoller {
     }*/
 
     public static void getallUsers() {
-        System.out.println("thing/list");
+        System.out.println("Users/list");
 
         try {
 //      This is a Crud statement to Read
