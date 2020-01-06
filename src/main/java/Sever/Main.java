@@ -49,9 +49,10 @@ public class Main {
 
         // code to get data from, write to the database etc goes here!
 
-        UserContoller.getallUsers();
-        TrackerController.getallTracker();
 
+
+        UserContoller.adduser("jessiethebest101", "jessie", "hodges", "16/06/2002", "jessie@yahoo.co.uk", "Female", "Testing123" );
+        UserContoller.getallUsers();
 
         closeDatabase();
     }

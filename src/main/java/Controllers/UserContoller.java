@@ -55,18 +55,24 @@ public class UserContoller {
 
         try {
 //      This is a Crud statement to Read
-            PreparedStatement ps = Main.db.prepareStatement("SELECT UserID, Username, DOB, Email, Gender, Password FROM Users");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT UserID, Username, FirstName, LastName, DOB, Email, Gender, Password FROM Users");
 
             ResultSet results = ps.executeQuery();
             while (results.next()) {
                 int UserId = results.getInt(1);
                 String Username = results.getString(2);
-                String DOB = results.getString(3);
-                String Email = results.getString(4);
-                String Gender = results.getString(5);
-                String Password = results.getString(6);
+                String FirstName = results.getString(3);
+                String LastName = results.getString(4);
+                String DOB = results.getString(5);
+                String Email = results.getString(6);
+                String Gender = results.getString(7);
+                String Password = results.getString(8);
+
+
                 System.out.println("ID: " + UserId + " ");
                 System.out.println("Username: " + Username + " ");
+                System.out.println("FirstName: " + FirstName + " ");
+                System.out.println("Lastname: " + LastName + " ");
                 System.out.println("DOB: " + DOB + " ");
                 System.out.println("Email: " + Email + " ");
                 System.out.println("Gender: " + Gender + " ");
@@ -82,18 +88,19 @@ public class UserContoller {
     }
 
     // This is a CRUD create statement
-    public static void adduser(Integer userID, String username, String DOB, String email, String gender, String password) {
+    public static void adduser(String username, String FirstName, String LastName, String DOB, String email, String gender, String password) {
 
         try {
 
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (userId, username, DOB, email, gender, password) VALUES (?, ?, ?, ?,?,?)");
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users ( username, FirstName, LastName, DOB, email, gender, password) VALUES (?, ?, ?, ?,?,?,?)");
 
-            ps.setInt(1, userID);
-            ps.setString(2, username);
-            ps.setString(3, DOB);
-            ps.setString(4, email);
-            ps.setString(5, gender);
-            ps.setString(6, password);
+            ps.setString(1, username);
+            ps.setString(2, FirstName);
+            ps.setString(3, LastName);
+            ps.setString(4, DOB);
+            ps.setString(5, email);
+            ps.setString(6, gender);
+            ps.setString(7, password);
             ps.executeUpdate();
 
         } catch (Exception exception) {
@@ -101,18 +108,20 @@ public class UserContoller {
         }
     }
 // This a update crud statement
-        public static void updateuser(Integer userID, String username, String DOB, String email, String gender, String password){
+        public static void updateuser(Integer userID, String username, String FirstName, String Lastname,  String DOB, String email, String gender, String password){
 
 
             try {
-                PreparedStatement ps = Main.db.prepareStatement("UPDATE Users SET UserID = ?,Username = ?, DOB = ?, Email = ?, Gender = ?, Password = ?,");
+                PreparedStatement ps = Main.db.prepareStatement("UPDATE Users SET UserID = ?,Username = ?, FirstName = ?, LastName = ?, DOB = ?, Email = ?, Gender = ?, Password = ?,");
 
                 ps.setInt(1, userID);
                 ps.setString(2, username);
-                ps.setString(3, DOB);
-                ps.setString(4, email);
-                ps.setString(5, gender);
-                ps.setString(6, password);
+                ps.setString(3, FirstName);
+                ps.setString(4, Lastname);
+                ps.setString(5, DOB);
+                ps.setString(6, email);
+                ps.setString(7, gender);
+                ps.setString(8, password);
                 ps.executeUpdate();
 
 
