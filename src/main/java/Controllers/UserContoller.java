@@ -51,7 +51,7 @@ public class UserContoller {
 
     }
 
-/*    public static void getallUsers() {
+    /*public static void getallUsers() {
         System.out.println("Users/list");
 
         try {
@@ -97,21 +97,37 @@ public class UserContoller {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String AddUsers(
-    @FormDataParam("UserID") Integer UserID, @FormDataParam("UserName") String UserName, @FormDataParam("FirstName") String FirstName, @FormDataParam("LastName") String LastName, @FormDataParam("DOB") String DOB, @FormDataParam("Email")String Email, @FormDataParam("Gender") String Gender, @FormDataParam("Password") String Password){
+    @FormDataParam("UserName") String UserName, @FormDataParam("FirstName") String FirstName, @FormDataParam("LastName") String LastName, @FormDataParam("DOB") String DOB, @FormDataParam("Email")String Email, @FormDataParam("Gender") String Gender, @FormDataParam("Password") String Password){
 
     try{
-        if (UserID == null || UserName == null || FirstName == null || LastName == null || DOB == null || Email
+        if (UserName == null || FirstName == null || LastName == null || DOB == null || Email == null || Gender == null || Password == null) {
+            throw new Exception("One or more form data parameters are missing in the HTTP request.");
+        }
+        System.out.println("add/new UserName=" + UserName);
+
+        PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (Username, FirstName, LastName, DOB, Email, Gender, Password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        ps.setString(1, UserName);
+        ps.setString(2, FirstName);
+        ps.setString(3, LastName);
+        ps.setString(4, DOB);
+        ps.setString(5, Email);
+        ps.setString(6, Gender);
+        ps.setString(7,Password);
+        ps.execute();
+        return "{\"status\": \"OK\"}";
+    } catch (Exception exception){
+        System.out.println("Database error: " + exception.getMessage());
+        return "{\"error\": \"Unable to create new item, please see server console for more info.\"}";
+        }
     }
 
-    }
 
 
 
 
 
 
-
-    /*public static void adduser(String username, String FirstName, String LastName, String DOB, String email, String gender, String password) {
+   /* public static void adduser(String username, String FirstName, String LastName, String DOB, String email, String gender, String password) {
 
         try {
 
@@ -130,8 +146,45 @@ public class UserContoller {
             System.out.println("Database error: " + exception.getMessage());
         }
     }*/
+
+   @POST
+   @Path("update")
+   @Consumes(MediaType.MULTIPART_FORM_DATA)
+   @Produces(MediaType.APPLICATION_JSON)
+   public String updateUsers(
+           @FormDataParam("UserId") Integer UserID, @FormDataParam("UserName") String UserName, @FormDataParam("FirstName") String FirstName, @FormDataParam("LastName") String LastName, @FormDataParam("DOB")String DOB, @FormDataParam("Email")String Email, @FormDataParam("Gender")String Gender, @FormDataParam("Password")String Password) {
+       try {
+           if (UserID == null ||UserName == null || FirstName == null || LastName == null || DOB == null || Email == null || Gender == null || Password == null) {
+               throw new Exception("One or more form data parameters are missing in the HTTP request.");
+           }
+           System.out.println("Users/update UserName=" + UserName);
+
+           PreparedStatement ps = Main.db.prepareStatement("UPDATE Users SET UserID = ?, UserName = ?, FirstName = ?, LastName = ?, DOB = ?, Email = ?, Gender = ?, Password = ? WHERE Username = ?");
+           ps.setInt(1, UserID);
+           ps.setString(2, UserName);
+           ps.setString(3, FirstName);
+           ps.setString(4, LastName);
+           ps.setString(5, DOB);
+           ps.setString(6,Email);
+           ps.setString(7,Gender);
+           ps.setString(8, Password);
+           ps.execute();
+           return "{\"status\": \"OK\"}";
+
+       }catch (Exception exception) {
+           System.out.println("Database error: " + exception.getMessage());
+           return "{\"error\": \"Unable to update item, please see server console for more info.\"}";
+       }
+   }
+
+
+
+
+
+
+
 // This a update crud statement
-        public static void updateuser(Integer userID, String username, String FirstName, String Lastname,  String DOB, String email, String gender, String password){
+        /*public static void updateuser(Integer userID, String username, String FirstName, String Lastname,  String DOB, String email, String gender, String password){
 
 
             try {
@@ -152,9 +205,38 @@ public class UserContoller {
         } catch (Exception exception) {
                 System.out.println("Database error: " + exception.getMessage());
             }
+        }*/
+
+
+        @POST
+    @Path("Delete")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String DeleteUsers(@FormDataParam("UserID")Integer UserID){
+
+            try {
+                if (UserID == null) {
+                    throw new Exception("One or more form data parameters are missing in the HTTP request.");
+                }
+                System.out.println("thing/delete UserID=" + UserID);
+
+                PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Users WHERE UserID = ?");
+
+                ps.setInt(1, UserID);
+
+                ps.execute();
+
+                return "{\"status\": \"OK\"}";
+
+            } catch (Exception exception) {
+                System.out.println("Database error: " + exception.getMessage());
+                return "{\"error\": \"Unable to delete item, please see server console for more info.\"}";
+
+            }
         }
 
-        public static void deletleUsers(int UserID){
+
+        /*public static void deletleUsers(int UserID){
 
         try{
             PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Users WHERE UserID = ?");
@@ -166,7 +248,7 @@ public class UserContoller {
         } catch(Exception exception) {
             System.out.println("Databse error: " + exception.getMessage());
         }
-    }
+    }*/
 
 
 

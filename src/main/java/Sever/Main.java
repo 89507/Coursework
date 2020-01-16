@@ -52,8 +52,8 @@ public class Main {
 
 
 
-        UserContoller.adduser("zach123", "a", "b", "16/06/2002", "zach1234@yahoo.co.uk", "male", "Testing1234" );
-        //UserContoller.getallUsers();
+        UserContoller.adduser("zach1234", "a", "b", "16/06/2002", "zach12345@yahoo.co.uk", "male", "Testing1234" );
+        UserContoller.getallUsers();
 
         closeDatabase();
     }*/
