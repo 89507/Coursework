@@ -1,12 +1,11 @@
 package Controllers;
 
 import Sever.Main;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,28 +14,30 @@ import java.sql.ResultSet;
 public class UserContoller {
 
     // This method prints out the contents of users from my SQL table
-   /* @GET
+    //$ curl -s localhost:8081/Users/list
+    @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-
     public static String getallUsers(){
-        System.out.println("thing/list");
+        System.out.println("Users/list");
         JSONArray list = new JSONArray();
 
         try {
 //      This is a Crud statement to Read
-            PreparedStatement ps = Main.db.prepareStatement("SELECT * FROM Users");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT UserID, Username, FirstName, LastName, DOB, Email, Gender, Password FROM Users");
 
             ResultSet results = ps.executeQuery();
             while (results.next()) {
 
                 JSONObject item = new JSONObject();
-                item.put("id", results.getInt(1));
-                item.put("name", results.getString(2));
-                item.put("DOB", results.getInt(3));
-                item.put("Email", results.getString(4));
-                item.put("Gender", results.getString(5));
-                item.put("Password", results.getString(6));
+                item.put("UserID", results.getInt(1));
+                item.put("Username", results.getString(2));
+                item.put("FirstName", results.getString(3));
+                item.put("LastName", results.getString(4));
+                item.put("DOB", results.getString(5));
+                item.put("Email", results.getString(6));
+                item.put("Gender", results.getString(7));
+                item.put("Password", results.getString(8));
                 list.add(item);
 
             }
@@ -48,9 +49,9 @@ public class UserContoller {
 
         }
 
-    }*/
+    }
 
-    public static void getallUsers() {
+/*    public static void getallUsers() {
         System.out.println("Users/list");
 
         try {
@@ -85,10 +86,32 @@ public class UserContoller {
 
         }
 
-    }
+    }*/
 
     // This is a CRUD create statement
-    public static void adduser(String username, String FirstName, String LastName, String DOB, String email, String gender, String password) {
+
+
+
+    @POST
+    @Path("Add")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String AddUsers(
+    @FormDataParam("UserID") Integer UserID, @FormDataParam("UserName") String UserName, @FormDataParam("FirstName") String FirstName, @FormDataParam("LastName") String LastName, @FormDataParam("DOB") String DOB, @FormDataParam("Email")String Email, @FormDataParam("Gender") String Gender, @FormDataParam("Password") String Password){
+
+    try{
+        if (UserID == null || UserName == null || FirstName == null || LastName == null || DOB == null || Email
+    }
+
+    }
+
+
+
+
+
+
+
+    /*public static void adduser(String username, String FirstName, String LastName, String DOB, String email, String gender, String password) {
 
         try {
 
@@ -106,7 +129,7 @@ public class UserContoller {
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
         }
-    }
+    }*/
 // This a update crud statement
         public static void updateuser(Integer userID, String username, String FirstName, String Lastname,  String DOB, String email, String gender, String password){
 
