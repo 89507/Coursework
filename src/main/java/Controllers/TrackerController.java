@@ -2,12 +2,25 @@ package Controllers;
 
 import Sever.Main;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class TrackerController {
 
-    public static void getallTracker() {
+
+    @GET
+    @Path("list")
+    @Produces(MediaType.APPLICATION_JSON)
+
+
+
+
+
+    /*public static void getallTracker() {
         System.out.println("tracker/list");
 
         try {
@@ -39,7 +52,7 @@ public class TrackerController {
             System.out.println("Database error: " + exception.getMessage());
 
         }
-    }
+    }*/
 
 
         // This is a CRUD create statement
