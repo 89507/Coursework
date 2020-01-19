@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 @Path("Users/")
-public class UserContoller {
+public class UserController {
 
     // This method prints out the contents of users from my SQL table
     //$ curl -s localhost:8081/Users/list
@@ -147,6 +147,9 @@ public class UserContoller {
         }
     }*/
 
+
+
+   // this updates the Users data
    @POST
    @Path("update")
    @Consumes(MediaType.MULTIPART_FORM_DATA)

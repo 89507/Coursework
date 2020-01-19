@@ -1,7 +1,7 @@
 package Sever;// These are imports, they add a connection class, so the code can use the SQL library
 // Test for github
 import Controllers.TrackerController;
-import Controllers.UserContoller;
+import Controllers.UserController;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
