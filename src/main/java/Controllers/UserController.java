@@ -265,10 +265,11 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     //this is asking for the JSON to get username and password ready for the login
     public String loginUser(@FormDataParam("Username") String Username, @FormDataParam("Password") String Password, @FormDataParam("Token")String Token) {
-
-        if(!UserController.validToken(Token)) {
-            return "{\"error\": \"You don't appear to be logged in.\"}";
-        }
+System.out.print("Username "+ Username);
+System.out.print("Password "+ Password);
+        //if(!UserController.validToken(Token)) {
+        //    return "{\"error\": \"You don't appear to be logged in.\"}";
+        //}
 
         try {
 
