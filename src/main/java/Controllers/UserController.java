@@ -258,11 +258,12 @@ public class UserController {
 
 
 
-
+//this is the code for my login sysytem - the path is Users/login
     @POST
     @Path("login")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
+    //this is asking for the JSON to get username and password ready for the login
     public String loginUser(@FormDataParam("Username") String Username, @FormDataParam("Password") String Password) {
 
         try {
@@ -274,11 +275,14 @@ public class UserController {
             ResultSet loginResults = ps1.executeQuery();
             if (loginResults.next()) {
 
+                //this determines weather the user has input a correct password with their username
                 String correctPassword = loginResults.getString(1);
                 if (Password.equals(correctPassword)) {
 
+                    //this prepares a random token - a string of random letters and numbers - this is for security perposes
                     String token = UUID.randomUUID().toString();
 
+                    //this sets the username and token up in order to make sure they have the token
                     PreparedStatement ps2 = Main.db.prepareStatement("UPDATE Users SET Token = ? WHERE Username = ?");
                     ps2.setString(1, token);
                     ps2.setString(2, Username);
@@ -289,6 +293,7 @@ public class UserController {
                     userDetails.put("token", token);
                     return userDetails.toString();
 
+                    //these are the results returned if the user does not get the correct password
                 } else {
                     return "{\"error\": \"Incorrect password!\"}";
                 }
@@ -296,7 +301,7 @@ public class UserController {
             } else {
                 return "{\"error\": \"Unknown user!\"}";
             }
-
+//this is an error catch to make my debugging processs much easier
         } catch (Exception exception) {
             System.out.println("Database error during /user/login: " + exception.getMessage());
             return "{\"error\": \"Server side error!\"}";
