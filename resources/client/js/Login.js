@@ -16,23 +16,23 @@ function login(event) {
     const form = document.getElementById("loginForm");
     const formData = new FormData(form);
 
-    fetch("/user/login", {method: 'post', body: formData}
+    fetch("/Users/login", {method: 'post', body: formData}
     ).then(response => response.json()
 ).then(responseData => {
 
         if (responseData.hasOwnProperty('error')) {
         alert(responseData.error);
     } else {
-        Cookies.set("username", responseData.username);
-        Cookies.set("token", responseData.token);
+        Cookies.set("Username", responseData.Username)
+        Cookies.set("Token", responseData.token);
 
-        window.location.href = '/client/index.html';
+        window.location.href = "http://localhost:8081/client/register.html" ;
     }
 });
 }
 function logout() {
 
-    fetch("/user/logout", {method: 'post'}
+    fetch("/Users/logout", {method: 'post'}
     ).then(response => response.json()
 ).then(responseData => {
         if (responseData.hasOwnProperty('error')) {

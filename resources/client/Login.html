@@ -4,10 +4,31 @@
     <title>Demo page</title>
     <link rel="stylesheet" type="text/css" href="/client/css/styles.css">
     <script src="/client/js/js.cookie.js"></script>
-    <script src="/client/js/js.cookie.js"></script>
-    <script src="/client/js/login.js"></script>
+    <script src="/client/js/Login.js"></script>
+
+
+
+
+    <style>
+        .LogintoRegisterButton {
+            background-color: blue;
+            border: none;
+            color: white;
+            padding: 20px 34px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            position: absolute;
+            left: 800px;
+            top: 200px;
+        }
+    </style>
+
 </head>
-<body onload="pageLoad()">
+<body onload="pageLoad1()">
 <div id="content">
     <div id="loggedInDetails"></div>
 
@@ -16,13 +37,13 @@
     <form id="loginForm">
         <div class="loginDiv">
 <!--            //this creates the label for my username box-->
-            <label for="username">Username: </label>
-            <input type="text" name="username" id="username">
+            <label for="Username">Username: </label>
+            <input type="text" name="Username" id="Username">
         </div>
         <div class="loginDiv">
 <!--            //this creates the label for my Password box-->
-            <label for="password">Password: </label>
-            <input type="password" name="password" id="password">
+            <label for="Password">Password: </label>
+            <input type="Password" name="Password" id="Password">
         </div>
         <div class="loginDiv">
 <!--            //this creates a submit button for the username and password-->
@@ -30,5 +51,6 @@
         </div>
     </form>
 </div>
+<a href="register.html" class="LogintoRegisterButton">Click here if you don't have an account!</a>
 </body>
 </html>

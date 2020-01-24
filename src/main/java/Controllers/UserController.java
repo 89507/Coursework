@@ -264,11 +264,15 @@ public class UserController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     //this is asking for the JSON to get username and password ready for the login
-    public String loginUser(@FormDataParam("Username") String Username, @FormDataParam("Password") String Password) {
+    public String loginUser(@FormDataParam("Username") String Username, @FormDataParam("Password") String Password, @FormDataParam("Token")String Token) {
+
+        if(!UserController.validToken(Token)) {
+            return "{\"error\": \"You don't appear to be logged in.\"}";
+        }
 
         try {
 
-            System.out.println("users/login");
+            System.out.println("Users/login");
 
             PreparedStatement ps1 = Main.db.prepareStatement("SELECT Password FROM Users WHERE Username = ?");
             ps1.setString(1, Username);
@@ -289,8 +293,8 @@ public class UserController {
                     ps2.executeUpdate();
 
                     JSONObject userDetails = new JSONObject();
-                    userDetails.put("username", Username);
-                    userDetails.put("token", token);
+                    userDetails.put("Username", Username);
+                    userDetails.put("Token", token);
                     return userDetails.toString();
 
                     //these are the results returned if the user does not get the correct password
@@ -301,7 +305,7 @@ public class UserController {
             } else {
                 return "{\"error\": \"Unknown user!\"}";
             }
-//this is an error catch to make my debugging processs much easier
+//this is an error catch to make my debugging process much easier
         } catch (Exception exception) {
             System.out.println("Database error during /user/login: " + exception.getMessage());
             return "{\"error\": \"Server side error!\"}";
@@ -317,7 +321,7 @@ public class UserController {
 
         try {
 
-            System.out.println("user/logout");
+            System.out.println("Users/logout");
 
             PreparedStatement ps1 = Main.db.prepareStatement("SELECT UserID FROM Users WHERE Token = ?");
             ps1.setString(1, token);

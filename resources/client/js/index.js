@@ -31,7 +31,7 @@ function checkLogin() {
             button.style.visibility = "visible";
         }
 
-        logInHTML = "Not logged in. <a href='/client/login.html'>Log in</a>";
+        logInHTML = "Not logged in. <a href='/client/Login.html'>Log in</a>";
     } else {
 
         let editButtons = document.getElementsByClassName("editButton");
@@ -44,7 +44,7 @@ function checkLogin() {
             button.style.visibility = "visible";
         }
 
-        logInHTML = "Logged in as " + username + ". <a href='/client/login.html?logout'>Log out</a>";
+        logInHTML = "Logged in as " + username + ". <a href='/client/Login.html?logout'>Log out</a>";
 
     }
 
