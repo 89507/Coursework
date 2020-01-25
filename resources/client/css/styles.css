@@ -1,7 +1,7 @@
 body {
-    background-color: black;
+    background-color: midnightblue;
     margin: 0;
-    font-family: 'Arial', serif;
+    font-family: 'calibri', serif;
 }
 
 h1 {
@@ -9,12 +9,14 @@ h1 {
 }
 
 #content {
-    background-color: #99b2cd;
-    width: 1200px;
+    background-color: #fdfefe;
+    width: 1470px;
     margin: 0 auto;
-    min-height: 600px;
+    min-height: 500px;
     padding: 32px;
 }
+
+
 .loginDiv {
     font-size: 28pt;
     margin-top: 40px;

@@ -1,44 +1,53 @@
 function pageLoadregister() {
+
+    {
+        document.getElementById("registersubmitButton").addEventListener("click", register);
+    }
+
 //debugger;
     function register(event) {
-        //debugger;
+        debugger;
         event.preventDefault();
+
+console.log("got to here 1 ")
+        //const form = document.getElementById("registerform");
+        //const formData = new FormData(form);
+
+        /*fetch("/Users/Add", {method: 'post', body: formData}
+        ).then(response => response.json()
+        ).then(responseData => {*/
+
+        //document.getElementById("Username").innerHTML = 'Add new User:';
+
+        //document.getElementById("Username").value = '';
+        //document.getElementById("FirstName").value = '';
+        //document.getElementById("LastName").value = '';
+        //document.getElementById("DOB").value = '';
+        //document.getElementById("Email").value = '';
+        //document.getElementById("Gender").value = '';
+        //document.getElementById("Password").value = '';
+
+
+
+console.log("got to here 2");
 
         const form = document.getElementById("registerform");
         const formData = new FormData(form);
 
-        fetch("/Users/add", {method: 'post', body: formData}
+        let apiPath = '/Users/Add';
+
+        fetch(apiPath, {method: 'post', body: formData}
         ).then(response => response.json()
         ).then(responseData => {
 
-            document.getElementById("Username").value = FormData.Username;
-            document.getElementById("FirstName").value = FormData.FirstName;
-            document.getElementById("LastName").value = FormData.LastName;
-            document.getElementById("DOB").value = FormData.DOB;
-            document.getElementById("Email").value = FormData.Email;
-            document.getElementById("Gender").value = FormData.Gender;
-            document.getElementById("Password").value = FormData.Password;
-
-
-            const id = document.getElementById("Username").value;
-            const form = document.getElementById("registerform");
-            const fromData = new FormData(form);
-
-            let apiPath = '/Users/add';
-
-            fetch(apiPath, {method: 'post', body:formData}
-            ).then(response => response.json()
-            ). then(responseData => {
-
-                if(responseData.hasOwnProperty('error')) {
-                    alert(responseData.error);
-                }else {
-                    document.getElementById("registerDiv".style.display = 'block')
-                    pageLoadregister()
-                }
-
-
-            }
-        });
+         /*   if (responseData.hasOwnProperty('error')) {
+                alert(responseData.error);
+            } else {*/
+                //document.getElementById("registerDiv".style.display = 'block');
+                //pageLoadregister()
+            window.location.href = "http://localhost:8081/client/Accounthome.html"
+            });
+        }
     }
-}
+
+
