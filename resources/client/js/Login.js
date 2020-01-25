@@ -1,5 +1,5 @@
 function pageLoad1() {
-    debugger;
+    //debugger;
     if(window.location.search === '?logout') {
         document.getElementById('content').innerHTML = '<h1>Logging out, please wait...</h1>';
         logout();
@@ -10,7 +10,7 @@ function pageLoad1() {
 }
 
 function login(event) {
-    debugger;
+    //debugger;
     event.preventDefault();
 
     const form = document.getElementById("loginForm");

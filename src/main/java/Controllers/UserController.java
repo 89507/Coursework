@@ -97,22 +97,22 @@ public class UserController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String AddUsers(
-    @FormDataParam("UserName") String UserName, @FormDataParam("FirstName") String FirstName, @FormDataParam("LastName") String LastName, @FormDataParam("DOB") String DOB, @FormDataParam("Email")String Email, @FormDataParam("Gender") String Gender, @FormDataParam("Password") String Password){
+    @FormDataParam("Username") String Username, @FormDataParam("FirstName") String FirstName, @FormDataParam("LastName") String LastName, @FormDataParam("DOB") String DOB, @FormDataParam("Email")String Email, @FormDataParam("Gender") String Gender, @FormDataParam("Password") String Password){
 
     try{
-        if (UserName == null || FirstName == null || LastName == null || DOB == null || Email == null || Gender == null || Password == null) {
+        if (Username == null || FirstName == null || LastName == null || DOB == null || Email == null || Gender == null || Password == null) {
             throw new Exception("One or more form data parameters are missing in the HTTP request.");
         }
-        System.out.println("add/new UserName=" + UserName);
+        System.out.println("add/new Username=" + Username);
 
         PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (Username, FirstName, LastName, DOB, Email, Gender, Password) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        ps.setString(1, UserName);
+        ps.setString(1, Username);
         ps.setString(2, FirstName);
         ps.setString(3, LastName);
         ps.setString(4, DOB);
         ps.setString(5, Email);
         ps.setString(6, Gender);
-        ps.setString(7,Password);
+        ps.setString(7, Password);
         ps.execute();
         return "{\"status\": \"OK\"}";
     } catch (Exception exception){
@@ -268,7 +268,7 @@ public class UserController {
 System.out.print("Username "+ Username);
 System.out.print("Password "+ Password);
         //if(!UserController.validToken(Token)) {
-        //    return "{\"error\": \"You don't appear to be logged in.\"}";
+          //  return "{\"error\": \"You don't appear to be logged in.\"}";
         //}
 
         try {
