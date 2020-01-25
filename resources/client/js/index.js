@@ -13,6 +13,9 @@ console.log("index test");
         + 'Generated at ' + now.toLocaleTimeString()
         + '<div style="text-align: center;">'
         + '<h3>Welcome to GlucoTrak the new online diabetes tracker. This website has been created with you in mind. Easy to use and understand, GlucoTrak enables you to log your diabetes data in a logical format and track your blood sugars over time. If you are an existing user (well done you!), please login using the button at the top right of the page. If you are new user, please click on the button below to sign up and use GlucoTrak from today.</h3>'
+        + '<div style="text-align: left"'
+        + '<div id="footer">'
+        + '<h5></h5>'
         + '</div>'
         + '</div>';
 
