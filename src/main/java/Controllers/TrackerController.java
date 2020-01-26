@@ -95,7 +95,7 @@ public class TrackerController {
             @FormDataParam("UserID") Integer UserID, @FormDataParam("Date") String Date, @FormDataParam("Time") String Time, @FormDataParam("MealID") Integer MealID, @FormDataParam("Catogery") String Catogery, @FormDataParam("Amount") Integer Amount, @FormDataParam("InsulinSite") String InsulinSite) {
 
         try {
-            if (Date == null || Time == null || Catogery == null || Amount == null) {
+            if (Date == null || Time == null || Amount == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("add/new UserID=" + UserID);
