@@ -1,13 +1,24 @@
 function pageLoad1() {
-    //debugger;
+  /*  let now = new Date();
+
+    let myHTML = '<div style="position:absolute;">'
+        + '<img src="/client/img/DiabeticImage.jpg" alt="Logo" width="20%"/>'
+        + '</div>'
+        + '</div>';
+
+    document.getElementById("testDiv").innerHTML = myHTML;*/
+/*}
     if(window.location.search === '?logout') {
         document.getElementById('content').innerHTML = '<h1>Logging out, please wait...</h1>';
         logout();
-    } else {
-        document.getElementById("loginButton").addEventListener("click", login);
-    }
+    } else{ */
 
-}
+
+
+        document.getElementById("loginButton").addEventListener("click", login);
+
+
+
 
 function login(event) {
     //debugger;
@@ -37,16 +48,19 @@ function logout() {
 ).then(responseData => {
         if (responseData.hasOwnProperty('error')) {
 
-        alert(responseData.error);
+            alert(responseData.error);
 
-    } else {
+        } else {
 
-        Cookies.remove("username");
-        Cookies.remove("token");
+            Cookies.remove("username");
+            Cookies.remove("token");
 
-        window.location.href = '/client/index.html';
-
-    }
-});
-
+            window.location.href = '/client/index.html';
+        }
+    });
 }
+}
+
+
+
+

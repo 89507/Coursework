@@ -1,7 +1,5 @@
 function pageLoad() {
 
-console.log("index test");
-
     let now = new Date();
 
     let myHTML = '<div style="text-align:left;">'

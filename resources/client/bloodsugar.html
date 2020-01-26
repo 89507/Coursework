@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blood Sugar</title>
+    <link rel="stylesheet" type="text/css" href="/client/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/client/js/register.js"></script>
+
+</head>
+<body onload = "pageLoadbloodsugar()">
+<div id="content">
+    <h1>Please Enter your blood sugar details</h1>
+    <form id="bloodsugarForm">
+        <div class="bloodsugarDiv">
+            <!--            this creates the label for my username box-->
+            <label for="Date">Date: </label>
+            <input type="date" name="Date" id="Date">
+        </div>
+        <div class="bloodsugarDiv">
+            <!--            //this creates the label for my First Name box-->
+            <label for="Time">Time: </label>
+            <input type="time" name="Time" id="Time">
+        </div>
+        <div class="bloodsugarDiv">
+            <!--            //this creates the label for my First Name box-->
+            <label for="SugarLevel">SugarLevel in mmol/L: </label>
+            <input type="number" step="0.1" min="0" max="50" name="SugarLevel" id="SugarLevel">
+        </div>
+
+        <div class="bloodsugarDiv">
+            <!--            //this creates a submit button for the username and password-->
+            <input type="submit" value="Submit" id="bloodsugarsubmitButton">
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -8,9 +8,11 @@ import org.json.simple.JSONObject;
 import javax.swing.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.sql.Time;
+@Path("BloodSugarTracker/")
 public class BloodSugarTracker {
 
 
@@ -33,7 +35,7 @@ public class BloodSugarTracker {
                 item.put("UserID", results.getInt(2));
                 item.put("Date", results.getString(3));
                 item.put("Time", results.getString(4));
-                item.put("SugarLevel", results.getInt(5));
+                item.put("SugarLevel", results.getDouble(5));
                 list.add(item);
 
             }
@@ -46,37 +48,6 @@ public class BloodSugarTracker {
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
     public static void getallBloodSugarTracker() {
@@ -114,19 +85,20 @@ public class BloodSugarTracker {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String AddBloodSugarTracker(
-            @FormDataParam("UserID") Integer UserID, @FormDataParam("Date") String Date, @FormDataParam("Time") String Time, @FormDataParam("SugarLevel") Integer SugarLevel) {
+            @FormDataParam("UserID") Integer UserID, @FormDataParam("Date") Date Date, @FormDataParam("Time") Time Time, @FormDataParam("SugarLevel") Double SugarLevel) {
 
         try {
             if (UserID == null || Date == null || Time == null || SugarLevel == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("add/new UserID=" + UserID);
-
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (UserID, Date, Time, SugarLevel) VALUES ( ?, ?, ?, ?,)");
-            ps.setInt(1, UserID);
-            ps.setString(2, Date);
-            ps.setString(3, Time);
-            ps.setInt(4, SugarLevel);
+            PreparedStatement ps = Main.db.prepareStatement("Select CURRENT_USER ()");
+           // PreparedStatement ps = Main.db.prepareStatement("select Users (UserID) for current_user insert into BloodSugarTracker UserID, Date, Time, SugarLevel) VALUES (?,?,?,?,)");
+            //PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (UserID, Date, Time, SugarLevel) VALUES ( ?, ?, ?, ?,)");
+            //ps.setInt(1, UserID);
+          //ps.setDate(2, Date);
+            //ps.setTime(3, Time);
+            //ps.setDouble(4, SugarLevel);
             ps.execute();
 
             return "{\"status\": \"OK\"}";
@@ -135,21 +107,6 @@ public class BloodSugarTracker {
             return "{\"error\": \"Unable to create new item, please see server console for more info.\"}";
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
  /*   // This is a CRUD create statement
@@ -178,9 +135,9 @@ public class BloodSugarTracker {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String updateBloodSugarTracker(
-            @FormDataParam("UserID") Integer UserID, @FormDataParam("Date") String Date, @FormDataParam("Time") String Time, @FormDataParam("SugarLevel") Integer SugarLevel) {
+            @FormDataParam("UserID") Integer UserID, @FormDataParam("Date") String Date, @FormDataParam("Time") String Time, @FormDataParam("SugarLevel") double SugarLevel) {
         try {
-            if (UserID == null || Date == null || Time == null || SugarLevel == null) {
+            if (UserID == null || Date == null || Time == null ) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("Users/update UserID=" + UserID);
@@ -189,7 +146,7 @@ public class BloodSugarTracker {
             ps.setInt(1, UserID);
             ps.setString(2, Date);
             ps.setString(3, Time);
-            ps.setInt(4, SugarLevel);
+            ps.setDouble(4, SugarLevel);
             ps.execute();
             return "{\"status\": \"OK\"}";
 
@@ -240,7 +197,7 @@ public class BloodSugarTracker {
             }
             System.out.println("thing/delete UserID=" + UserID);
 
-            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Users WHERE UserID = ?");
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM BloodSugarTracker WHERE UserID = ?");
 
             ps.setInt(1, UserID);
 

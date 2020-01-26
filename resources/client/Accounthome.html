@@ -2,9 +2,145 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Account home</title>
-</head>
-<body>
 
+</head>
+
+
+<title>Account home</title>
+<link rel="stylesheet" type="text/css" href="/client/css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="/client/js/Accounthome.js"></script>
+
+
+<style>
+    .AccountobloodButton {
+        background-color: paleturquoise;
+        border: none;
+        color: black;
+        padding: 20px 48px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        cursor: pointer;
+        position: absolute;
+        right: 16px;
+        top: 8px;
+        border-radius: 18px;
+    }
+</style>
+
+<style>
+    .AccounttomealsButton {
+        background-color: coral;
+        border: none;
+        color: black;
+        padding: 20px 34px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        cursor: pointer;
+        position: absolute;
+        left: 40px;
+        top: 450px;
+        border-radius: 18px ;
+    }
+</style>
+
+<style>
+    .AccounttoinsulinButton {
+        background-color: coral;
+        border: none;
+        color: black;
+        padding: 20px 34px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        cursor: pointer;
+        position: absolute;
+        left: 400px;
+        top: 450px;
+        border-radius: 18px ;
+    }
+</style>
+
+<style>
+
+ .AccounttoconversionButton {
+
+     background-color: paleturquoise;
+     border: none;
+     color: black;
+     padding: 20px 48px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     font-size: 20px;
+     margin: 4px 2px;
+     cursor: pointer;
+     position: absolute;
+     right: 16px;
+     top: 80px;
+     border-radius: 18px;
+
+
+
+ }
+
+</style>
+
+
+  <style>
+      .AccounttographsButton {
+
+
+          background-color: paleturquoise;
+          border: none;
+          color: black;
+          padding: 20px 48px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 20px;
+          margin: 4px 2px;
+          cursor: pointer;
+          position: absolute;
+          right: 160px;
+          top: 80px;
+          border-radius: 18px;
+
+
+      }
+
+
+
+
+
+
+  </style>
+
+
+
+
+
+
+
+
+
+
+<body onload="pageLoadaccounthome()">
+<a href="bloodsugar.html" class="AccountobloodButton">Click to log blood sugars</a>
+<a href="meals.html" class="AccounttomealsButton">Click to log meals</a>
+<a href="insulin.html" class="AccounttoinsulinButton">Click to log insulin</a>
+<a href="conversion.html" class="AccounttoconversionButton">Click to work out your conversion units</a>
+<a href="graphs.html" class="AccounttographsButton">click here to see your graphs</a>
+<div id="content">
+    <div id="testDiv"></div>
+</div>
 </body>
 </html>
