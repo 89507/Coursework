@@ -5,15 +5,13 @@ function pageLoadaccounthome() {
     let myHTML = '<div style="text-align:left;">'
         + '<div style="color: midnightblue;">'
         + '<h1>GlucoTrak</h1>'
-        + '<h2>Welcome to your GlucoTrak data. From here you can choose what information you want to store or look at your data history.</h2>'
-        /*+ '<div style="position:absolute;">'
-        + '<img src="/client/img/BloodSugarImage.jpg"  alt="Logo" width="30%"/>'
-        + '<div style="position:absolute;">'
-        + '<img src="/client/img/MealsImage.jpg"  alt="Logo" width="25%"/>'
-
-        + '<img src="/client/img/InsulinImage.jpg"  alt="Logo" width="30%"/>'
-        + '<img src="/client/img/ConversionImage.jpg"  alt="Logo" width="30%"/>'
-        */+ '<div style="font-style: italic;">'
+        + '<h2>Welcome to your GlucoTrak account page. From here you can choose what information you want to store or choose to look at your data history by clicking on the graph button above right.</h2>'
+        + '<img style="float: left; margin: 0px 15px 15px 0px;" src="/client/img/BloodSugarImage.jpg"  alt="Logo" width="25%"/>'
+        + '<img style="float: left; margin: 0px 15px 15px 0px;" src="/client/img/MealsImage.jpg"   alt="Logo" width="22%"/>'
+        + '<img style="float: left; margin: 0px 15px 15px 0px;" src="/client/img/InsulinImage1.jpg"   alt="Logo" width="22%"/>'
+        + '<img style="position: absolute; margin: 0px 0px 0px 0px;" src="/client/img/ConversionImage1.jpg"   alt="Logo" width="25%"/>'
+        //+ '<img src="/client/img/ConversionImage.jpg"  alt="Logo" width="20%"/>'
+        + '<div style="font-style: italic;">'
         + '<div style="text-align: right;">'
         + '<div style="text-align: center;">'
         + '<div style="text-align: left"'
@@ -25,14 +23,6 @@ function pageLoadaccounthome() {
     document.getElementById("testDiv").innerHTML = myHTML;
 
 }
-
-
-
-
-
-
-
-
 
 
     /*addEventListener("open", getCookie);

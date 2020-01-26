@@ -1,12 +1,5 @@
 function pageLoad1() {
-  /*  let now = new Date();
 
-    let myHTML = '<div style="position:absolute;">'
-        + '<img src="/client/img/DiabeticImage.jpg" alt="Logo" width="20%"/>'
-        + '</div>'
-        + '</div>';
-
-    document.getElementById("testDiv").innerHTML = myHTML;*/
 /*}
     if(window.location.search === '?logout') {
         document.getElementById('content').innerHTML = '<h1>Logging out, please wait...</h1>';

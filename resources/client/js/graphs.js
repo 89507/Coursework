@@ -4,7 +4,7 @@ function pageLoadgraphs() {
     const context = canvas.getContext('2d');
 
     let myChart = new Chart(context, {
-        type: 'bar',   // change this to 'pie' if wanted
+        type: 'line',   // line chart
         data: {
             labels: [
                 'Red things',
