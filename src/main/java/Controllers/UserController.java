@@ -275,11 +275,11 @@ System.out.print("Password "+ Password);
 
             System.out.println("Users/login");
 
-            PreparedStatement ps1 = Main.db.prepareStatement("SELECT Password FROM Users WHERE Username = ?");
+            PreparedStatement ps1 = Main.db.prepareStatement("SELECT Password, UserID FROM Users WHERE Username = ?");
             ps1.setString(1, Username);
             ResultSet loginResults = ps1.executeQuery();
             if (loginResults.next()) {
-
+                int UserID = loginResults.getInt(2);
                 //this determines weather the user has input a correct password with their username
                 String correctPassword = loginResults.getString(1);
                 if (Password.equals(correctPassword)) {
@@ -295,6 +295,7 @@ System.out.print("Password "+ Password);
 
                     JSONObject userDetails = new JSONObject();
                     userDetails.put("Username", Username);
+                    userDetails.put("UserID", UserID);
                     userDetails.put("Token", token);
                     return userDetails.toString();
 

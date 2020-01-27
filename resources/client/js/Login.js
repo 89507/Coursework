@@ -27,8 +27,10 @@ function login(event) {
         if (responseData.hasOwnProperty('error')) {
         alert(responseData.error);
     } else {
-        Cookies.set("Username", responseData.Username)
-        Cookies.set("Token", responseData.token);
+            console.log(responseData.UserID);
+        Cookies.set("Username", responseData.Username);
+        Cookies.set("Token", responseData.Token);
+        Cookies.set("UserID", responseData.UserID);
 
         window.location.href = "http://localhost:8081/client/Accounthome.html" ;
     }

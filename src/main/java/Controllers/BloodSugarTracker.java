@@ -85,20 +85,20 @@ public class BloodSugarTracker {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String AddBloodSugarTracker(
-            @FormDataParam("UserID") Integer UserID, @FormDataParam("Date") Date Date, @FormDataParam("Time") Time Time, @FormDataParam("SugarLevel") Double SugarLevel) {
+            @FormDataParam("UserID") Integer UserID, @FormDataParam("Date") String Date, @FormDataParam("Time") String Time, @FormDataParam("SugarLevel") Double SugarLevel) {
 
         try {
             if (UserID == null || Date == null || Time == null || SugarLevel == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("add/new UserID=" + UserID);
-            PreparedStatement ps = Main.db.prepareStatement("Select CURRENT_USER ()");
+            System.out.println("add/new UserID=" + UserID + " " + Date + " " + Time + " " + SugarLevel);
+            //PreparedStatement ps = Main.db.prepareStatement("Select CURRENT_USER ()");
            // PreparedStatement ps = Main.db.prepareStatement("select Users (UserID) for current_user insert into BloodSugarTracker UserID, Date, Time, SugarLevel) VALUES (?,?,?,?,)");
-            //PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (UserID, Date, Time, SugarLevel) VALUES ( ?, ?, ?, ?,)");
-            //ps.setInt(1, UserID);
-          //ps.setDate(2, Date);
-            //ps.setTime(3, Time);
-            //ps.setDouble(4, SugarLevel);
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO BloodSugarTracker (UserID, currentDate1, currentTime1, SugarLevel) VALUES ( ?, ?, ?, ?)");
+            ps.setInt(1, UserID);
+            ps.setString(2, Date);
+            ps.setString(3, Time);
+            ps.setDouble(4, SugarLevel);
             ps.execute();
 
             return "{\"status\": \"OK\"}";

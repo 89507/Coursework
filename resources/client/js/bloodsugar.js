@@ -4,7 +4,7 @@ function pageLoadbloodsugar() {
     document.getElementById("bloodsugarsubmitButton").addEventListener("click", bloodsugar);
 }
 
-//debugger;
+
 function bloodsugar(event) {
     //debugger;
     event.preventDefault();
@@ -13,6 +13,10 @@ function bloodsugar(event) {
     const form = document.getElementById("bloodsugarForm");
     const formData = new FormData(form);
 
+    let UserID = Cookies.get("UserID");
+    formData.append("UserID",UserID );
+console.log(formData);
+console.log(formData.get("SugarLevel"));
     fetch("/BloodSugarTracker/Add", {method: 'post', body: formData}
     ).then(response => response.json()
     ).then(responseData => {
