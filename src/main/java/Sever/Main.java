@@ -16,21 +16,24 @@ import java.sql.DriverManager;
 public class Main {
 
     public static Connection db = null;
-    //phase 2
+    //phase 2 - This opens the Database and creates the server on port 8081
     public static void main(String[] args) {
 
         openDatabase("Database.db");
        //UserContoller.adduser("Bobby","Bob", "smith","19/11/2011", "bob@gmail.com","Male", "password");
 
+        //This sets up and configures my controllers ready to code my controller classes
         ResourceConfig config = new ResourceConfig();
         config.packages("Controllers");
         config.register(MultiPartFeature.class);
         ServletHolder servlet = new ServletHolder(new ServletContainer(config));
 
+        //This creates a server on localhost:8081
         Server server = new Server(8081);
         ServletContextHandler context = new ServletContextHandler(server, "/");
         context.addServlet(servlet, "/*");
 
+        //This starts the server and has an error catch in place
         try {
             server.start();
             System.out.println("Server successfully started.");
@@ -55,7 +58,7 @@ public class Main {
         closeDatabase();
     }*/
 
-    // Opening and setting up
+    // This is the method that opens and configures the SQLite Database
     private static void openDatabase(String dbFile) {
         try {
             Class.forName("org.sqlite.JDBC");

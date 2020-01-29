@@ -19,16 +19,18 @@ public class UserController {
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public static String getallUsers(){
+        //below is the path needed to call this API
         System.out.println("Users/list");
         JSONArray list = new JSONArray();
 
         try {
-//      This is a Crud statement to Read
+//      This is a Crud statement to Read from the SQLite Database
             PreparedStatement ps = Main.db.prepareStatement("SELECT UserID, Username, FirstName, LastName, DOB, Email, Gender, Password FROM Users");
 
             ResultSet results = ps.executeQuery();
             while (results.next()) {
 
+                //this bind the results to a JSON object ready to output them later on
                 JSONObject item = new JSONObject();
                 item.put("UserID", results.getInt(1));
                 item.put("Username", results.getString(2));
@@ -41,8 +43,10 @@ public class UserController {
                 list.add(item);
 
             }
+            //this line returns the result
             return list.toString();
 
+            //this is error catching that outputs a messgae to help me de-bug
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
             return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
@@ -91,20 +95,23 @@ public class UserController {
     // This is a CRUD create statement
 
 
-
+//This is my Add user API the path is /Users/Add
     @POST
     @Path("Add")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String AddUsers(
+            //this is setting the Fields up ready to receive Form Data later on
     @FormDataParam("Username") String Username, @FormDataParam("FirstName") String FirstName, @FormDataParam("LastName") String LastName, @FormDataParam("DOB") String DOB, @FormDataParam("Email")String Email, @FormDataParam("Gender") String Gender, @FormDataParam("Password") String Password){
 
     try{
+        //These prevent certain fields from being null so the programme can function as required - else it will throw up an error
         if (Username == null || FirstName == null || LastName == null || DOB == null || Email == null || Gender == null || Password == null) {
             throw new Exception("One or more form data parameters are missing in the HTTP request.");
         }
         System.out.println("add/new Username=" + Username);
 
+        //This is an SQLite statement that inserts into Users the values input by the user
         PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (Username, FirstName, LastName, DOB, Email, Gender, Password) VALUES (?, ?, ?, ?, ?, ?, ?)");
         ps.setString(1, Username);
         ps.setString(2, FirstName);
@@ -114,7 +121,9 @@ public class UserController {
         ps.setString(6, Gender);
         ps.setString(7, Password);
         ps.execute();
+        //this returns a message to tell me it has successfully added a user
         return "{\"status\": \"OK\"}";
+        //this is an error catch that will throw up an error if the database won't accept the given data
     } catch (Exception exception){
         System.out.println("Database error: " + exception.getMessage());
         return "{\"error\": \"Unable to create new item, please see server console for more info.\"}";
@@ -258,7 +267,7 @@ public class UserController {
 
 
 
-//this is the code for my login sysytem - the path is Users/login
+//this is the code for my login system - the path is Users/login
     @POST
     @Path("login")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -267,18 +276,18 @@ public class UserController {
     public String loginUser(@FormDataParam("Username") String Username, @FormDataParam("Password") String Password, @FormDataParam("Token")String Token) {
 System.out.print("Username "+ Username);
 System.out.print("Password "+ Password);
-        //if(!UserController.validToken(Token)) {
-          //  return "{\"error\": \"You don't appear to be logged in.\"}";
-        //}
 
         try {
-
+            //This prints out the API path
             System.out.println("Users/login");
 
+            //This the SQLite statement, it selects password and username from the users table ready to cheaack if they enter valid login details
             PreparedStatement ps1 = Main.db.prepareStatement("SELECT Password, UserID FROM Users WHERE Username = ?");
             ps1.setString(1, Username);
             ResultSet loginResults = ps1.executeQuery();
+
             if (loginResults.next()) {
+                //This gets the UserID so it can later be used as a Foregin key in my other SQLite databases (e.g bloodsugartracker requires it)
                 int UserID = loginResults.getInt(2);
                 //this determines weather the user has input a correct password with their username
                 String correctPassword = loginResults.getString(1);
@@ -293,6 +302,7 @@ System.out.print("Password "+ Password);
                     ps2.setString(2, Username);
                     ps2.executeUpdate();
 
+                    //this creates a new JSON object
                     JSONObject userDetails = new JSONObject();
                     userDetails.put("Username", Username);
                     userDetails.put("UserID", UserID);
